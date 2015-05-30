@@ -1,0 +1,51 @@
+
+body {
+  margin: 0px;
+  min-width: 650px;
+}
+
+body > div {
+  width: 100%;
+}
+
+#top {
+  height: 120px;
+  background: lightgrey;
+  position: relative;
+}
+
+#bottom {
+  height: 100vh;
+  background: green;
+}
+
+#content {
+  width: 50%;
+  min-width: 650px;
+}
+
+#tab {
+  padding: 10px;
+  min-width: 100px;
+
+  text-align: center;
+  color: lightgrey;
+
+  left: 10%;
+  bottom: 0px;
+
+  position: absolute;
+  background: green;
+}
+
+#logo {
+  position: absolute;
+  background: white;
+
+  transform: translateY(-50%);
+  right: 10%;
+  top: 50%;
+
+  width: 300px;
+  height: 70px;
+}
