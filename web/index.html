@@ -63,7 +63,15 @@
 	  <form action="" role="search">
 		<div class="form-group">
 		  <div class="input-group">
-			<input class="form-control" id="navbarInput-01" type="search" placeholder="Pesquisar">
+			<input class="form-control" id="navbarInput-01" type="search" placeholder="Pesquisar" list="musiclist">
+			
+			<!-- AQUI AS SUGESTOES -->
+			<datalist id="musiclist">
+				<option value="Canada">
+				<option value="China">
+				<option value="Mexico">
+				<option value="United Kingdom">
+			</datalist>
 			<span class="input-group-btn">
 			  <button type="submit" class="btn"><span class="fui-search"></span></button>
 			</span>
