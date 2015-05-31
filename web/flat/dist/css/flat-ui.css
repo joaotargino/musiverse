@@ -4237,7 +4237,7 @@ select[multiple].navbar-input {
 .navbar-form .select2-search input[type="text"] {
   height: 35px;
   padding: 5px 10px;
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.4;
   border-radius: 6px;
   }
@@ -4282,7 +4282,7 @@ select[multiple].navbar-form .select2-search input[type="text"] {
 .navbar-form .form-control,
 .navbar-form .select2-search input[type="text"] {
   display: table-cell;
-  font-size: 15px;
+  font-size: 12px;
   border-radius: 5px;
   }
 .navbar-form .form-group ~ .btn {
@@ -5902,6 +5902,14 @@ footer {
   color: #bac1c8;
   background-color: #edeff1;
   }
+  
+detail {
+	color: #16a085;
+}
+
+.little {
+	font-size: 13px;
+}
 footer a {
   font-weight: 700;
   color: #9aa4af;
