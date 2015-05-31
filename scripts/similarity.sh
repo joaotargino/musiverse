@@ -3,7 +3,9 @@
 id=$1
 size=$2
 
-filename=`find . -iname ${id}".h5"`
+filename=`find . -iname "${id}.csv"`
+
+echo $filename
 
 if [ -f ${filename} ]; then
   ranking=`Rscript similarity.R ${filename} ${size}`

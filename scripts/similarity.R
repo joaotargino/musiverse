@@ -2,10 +2,11 @@ library('proxy')
 
 args <- commandArgs(TRUE)
 
-file.input.a  <- strsplit(args[1], split="\\.h5")[[1]][1]
+file.input.a  <- args[1]
+#strsplit(args[1], split="\\.h5")[[1]][1]
 size          <- as.numeric(args[2])
 
-data.song <- read.csv(paste(file.input.a, ".csv", sep=""), header=F)
+data.song <- read.csv(file.input.a, header=F)
 
 data.base <- rbind(data.song, read.csv("database.csv", header=F))
 
