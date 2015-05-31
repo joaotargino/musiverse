@@ -6,12 +6,16 @@ file.input.a  <- strsplit(args[1], split="\\.h5")[[1]][1]
 size          <- as.numeric(args[2])
 
 data.song <- read.csv(paste(file.input.a, ".csv", sep=""), header=F)
-data.base <- read.csv("database.csv", header=F)
 
+data.base <- rbind(data.song, read.csv("database.csv", header=F))
 
-d <- simil(data.song[,2:ncol(data.song)], data.base[,2:ncol(data.base)])
+normalize <- function(x){(x-min(x))/(max(x)-min(x))}
 
-output <- data.frame(song=data.base[,1], score=as.vector(d))
+data.base[,c(-1)] <- sapply(data.base[,c(-1)], normalize )
+
+d <- simil(data.base[1,2:ncol(data.base)], data.base[2:nrow(data.base),2:ncol(data.base)])
+
+output <- data.frame(song=data.base[2:nrow(data.base),1], score=as.vector(d))
 output <- output[order(output$score),]
 output <- output[1:size,1]
 
