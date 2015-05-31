@@ -3,6 +3,16 @@
  * Copyright 2013-2014 Designmodo, Inc.
  */
 
+ datalist {
+	color: #c9c9c9;
+ }
+ 
+ select option {
+    height: 50px;
+    background-color: white;
+	color: #c9c9c9;
+}
+ 
 @font-face {
   font-family: 'Lato';
   font-style: normal;
