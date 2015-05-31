@@ -12,6 +12,10 @@
     background-color: white;
 	color: #c9c9c9;
 }
+
+.rec {
+	padding: 10px;
+}
  
 @font-face {
   font-family: 'Lato';

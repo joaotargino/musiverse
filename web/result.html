@@ -58,28 +58,21 @@
   </div> <!-- /row -->
 
   <div class="demo-type-example">
-    <h2><detail>re.</detail>descubra seu gosto</h2>
+    <h2>as similares a <detail>nome música</detail> são: </h2>
   </div>
   <br/>
 
-  <div class="row col-xs-12">
-    <form ng-submit="search()" role="search">
-      <div class="form-group">
-        <div class="input-group input-group-hg">
-          <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome da música aqui ..." list="musiclist" ng-model="query">
-
-          <!-- AQUI AS SUGESTOES -->
-          <datalist id="musiclist">
-            <option ng-value="song.title" ng-repeat="song in songs">
-			<!-- more -->
-          </datalist>
-
-          <span class="input-group-btn">
-            <button type="submit" class="btn"><span class="fui-search"></span></button>
-          </span>
-        </div>
-      </div>
-    </form>
+  <div class="row col-xs-12">                                    
+    <a href="#" class="thumbnail">
+		<!--  RECOMENDAÇÕES AQUI -->
+		<div class="rec" ng-repeat="song in recomendation">
+			Nome: {{song.title}}
+			<br/>
+			Artista: {{song.artist}}
+			<br/>
+			Artista: {{song.album}}
+		</div>
+	</a>
   </div>
 
   <br/>
