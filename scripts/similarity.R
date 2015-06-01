@@ -14,10 +14,11 @@ normalize <- function(x){(x-min(x))/(max(x)-min(x))}
 
 data.base[,c(-1)] <- sapply(data.base[,c(-1)], normalize )
 
-d <- simil(data.base[1,2:ncol(data.base)], data.base[2:nrow(data.base),2:ncol(data.base)])
+d <- simil(data.base[1,2:ncol(data.base)], data.base[2:nrow(data.base),2:ncol(data.base)], method="Euclidean")
 
 output <- data.frame(song=data.base[2:nrow(data.base),1], score=as.vector(d))
 output <- output[order(output$score),]
+#output <- output[(nrow(output)-size):nrow(output),1]
 output <- output[1:size,1]
 
 cat(as.character(output))

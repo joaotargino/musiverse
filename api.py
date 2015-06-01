@@ -1,11 +1,12 @@
 import os
-from flask import Flask, make_response
+from flask import Flask, make_response, request
+import json
 
 app = Flask(__name__)
 
 @app.route('/similarity')
 def similarity():
-    result = os.popen('bash similarity.sh ' + request.args.get('track_id') + '5')
+    result = os.popen('bash similarity.sh ' + request.args.get('track_id') + ' 5')
     result = result.read().split('\n')
     
     response = []
@@ -15,10 +16,10 @@ def similarity():
         song = {'artist': song[9], 'album': song[14], 'title': song[18]}
         response.append(song)
     
-    response = make_response(response)
+    response = make_response(json.dumps(response))
     response.headers['Access-Control-Allow-Origin'] = '*'
     
     return response
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5005)
+    app.run(host='0.0.0.0', port=5005, debug=True)
