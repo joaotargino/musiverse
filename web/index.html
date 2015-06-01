@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=1000, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Loading Angular -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
   <!-- Loading Bootstrap -->
   <link href="flat/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -82,28 +82,31 @@
     </form>
   </div>
 
+<br/>
+<br/>
+
+
+
   <div class="demo-type-example">
-    <h2>as similares a <detail>nome música</detail> são: </h2>
+    <h2>as <detail>similares</detail> a sua escolha são: </h2>
   </div>
   <br/>
 
   <div class="row col-xs-12">
-    <a href="#" class="thumbnail">
-      <!--  RECOMENDAÇÕES AQUI -->
-      <div class="rec" ng-repeat="song in recomendation">
+    <a href="#" class="thumbnail" ng-repeat="song in recomendation">
+     <!--  RECOMENDAÇÕES AQUI -->
+      <div class="rec">
         Nome: {{song.title}}
         <br/>
         Artista: {{song.artist}}
         <br/>
-        Artista: {{song.album}}
+        Álbum: {{song.album}}
       </div>
     </a>
   </div>
 
   <br/>
-  <br/>
-  <br/>
-
+  
   <!--
       <h3 class="demo-panel-title mbl pbl">Samples</h3>
       <div class="row demo-samples">

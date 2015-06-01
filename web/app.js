@@ -15,7 +15,7 @@ app.controller('controller', function($scope, $http) {
                 result = $scope.songs[i].track_id;
 
         $http({
-             url: "localhost:5005/similarity",
+             url: "http://localhost:5005/similarity",
              method: "GET",
              params: {
                  track_id: result
@@ -23,7 +23,7 @@ app.controller('controller', function($scope, $http) {
          })
 
             .success(function(data) {
-                $scope.recomendation = JSON.parse(data);
+                $scope.recomendation = data;
             })
     }
 });
