@@ -1,18 +1,18 @@
 import os
 from flask import Flask, make_response, request
 import json
+import csv
 
 app = Flask(__name__)
 
 @app.route('/similarity')
 def similarity():
     result = os.popen('bash similarity.sh ' + request.args.get('track_id') + ' 5')
-    result = result.read().split('\n')
+    songs = csv.reader(result.read().split('\n')[:-1], skipinitialspace=True)
     
     response = []
     
-    for song in result[:-1]:
-        song = song.split(',')
+    for song in songs:
         song = {'artist': song[9], 'album': song[14], 'title': song[18]}
         response.append(song)
     

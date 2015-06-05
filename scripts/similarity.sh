@@ -2,6 +2,7 @@
 
 id=$1
 size=$2
+mode=$3
 
 filename=`find . -iname "${id}.csv"`
 
