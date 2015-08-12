@@ -1,0 +1,10 @@
+{
+  "name": "musiverse",
+  "description": "Redescubra seu gosto musical",
+  "version": "1.0.0",
+  "homepage": "http://github.com/joaotargino/musiverse",
+  "license": "",
+  "private": false,
+  "dependencies": {
+  }
+}
