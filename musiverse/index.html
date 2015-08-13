@@ -64,47 +64,73 @@
         </div>
         <br/>
 
-        <div class="row col-xs-12">
-            <form ng-submit="search()" role="search" autocomplete="on">
-                <div class="form-group">
-                    <div class="input-group input-group-hg">
-                        <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome da música aqui ..." list="musiclist" ng-model="query">
-
-                        <!-- AQUI AS SUGESTOES -->
-                        <datalist id="musiclist">
-                            <option ng-value="song.title" ng-repeat="song in songs">
-                                <!-- more -->
-                        </datalist>
-
-                        <span class="input-group-btn">
-            <button type="submit" class="btn"><span class="fui-search"></span>
-                        </button>
-                        </span>
+        <form ng-submit="search()" role="search" autocomplete="on">
+            <div class="row demo-row">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Artista: </h4>
+                        </div>
+                        <div class="col-xs-8">
+                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome do artista aqui..." list="authorlist" ng-model="query.author">
+                            <!-- AQUI AS SUGESTOES -->
+                            <datalist id="authorlist">
+                                <option ng-value="song.artist_name" ng-repeat="song in songs">
+                                    <!-- more -->
+                            </datalist>
+                        </div>
                     </div>
                 </div>
-            </form>
-        </div>
 
-        <br/>
-        <br/>
-
-
-
-        <div class="demo-type-example">
-            <h2>as <detail>similares</detail> a sua escolha são: </h2>
-        </div>
-        <br/>
-
-        <div class="row col-xs-12">
-            <a href="#" class="thumbnail" ng-repeat="song in recomendation">
-                <!--  RECOMENDAÇÕES AQUI -->
-                <div class="rec">
-                    Nome: {{song.title}}
-                    <br/> Artista: {{song.artist}}
-                    <br/> Álbum: {{song.album}}
+            </div>
+            <div class="row demo-row">
+                <div class="col-xs-6 col-xs-offset-3">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <h4>Música: </h4>
+                        </div>
+                        <div class="col-xs-8">
+                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="query.track">
+                            <!-- AQUI AS SUGESTOES -->
+                            <datalist id="songlist">
+                                <option ng-value="song.title" ng-repeat="song in songs" data-track="{{song.track_id}}"></option>
+                                <!-- more -->
+                            </datalist>
+                        </div>
+                    </div>
                 </div>
-            </a>
+
+            </div>
+            <div class="row demo-row">
+                <div class="col-xs-2 col-xs-offset-5">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">
+                        <span class="fui-search"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <br/>
+        <br/>
+
+        <div class="ng-hide">
+            <div class="demo-type-example">
+                <h2>as <detail>similares</detail> a sua escolha são: </h2>
+            </div>
+            <br/>
+
+            <div class="row col-xs-12">
+                <a href="#" class="thumbnail" ng-repeat="song in recomendation">
+                    <!--  RECOMENDAÇÕES AQUI -->
+                    <div class="rec">
+                        Nome: {{song.title}}
+                        <br/> Artista: {{song.artist}}
+                        <br/> Álbum: {{song.album}}
+                    </div>
+                </a>
+            </div>
         </div>
+
         <br/>
     </div>
     <!-- /container -->
