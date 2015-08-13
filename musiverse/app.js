@@ -18,7 +18,7 @@ app.controller('controller', function($scope, $http) {
                 result = $scope.songs[i].track_id;
 
         $http({
-             url: "http://analytics.lsd.ufcg.edu.br:5405/similarity",
+             url: "http://localhost:5405/similarity",
              method: "GET",
              params: {
                  track_id: result
