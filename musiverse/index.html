@@ -34,19 +34,19 @@
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
                             <span class="sr-only">Toggle navigation</span>
                         </button>
-                        <a class="navbar-brand" href="">musiverse</a>
+                        <a class="navbar-brand" href="#/">musiverse</a>
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbar-collapse-01">
                         <ul class="nav navbar-nav navbar-left">
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">info <b class="caret"></b></a>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">info <b class="caret"></b></a>
                                 <span class="dropdown-arrow"></span>
                                 <ul class="dropdown-menu">
-                                    <li><a href="team.html">sobre musiverse</a>
+                                    <li><a href="#/team">sobre musiverse</a>
                                     </li>
-                                    <li><a href="#">laboratório analytics</a>
+                                    <li><a href="#/">laboratório analytics</a>
                                     </li>
                                 </ul>
                             </li>
@@ -60,113 +60,46 @@
         </div>
         <!-- /row -->
 
-        <div class="demo-type-example">
-            <h2><detail>re.</detail>descubra seu gosto</h2>
+        <div ng-view>
         </div>
-        <br/>
 
-        <form ng-submit="search()" role="search" autocomplete="on">
-            <div class="row demo-row">
-                <div class="col-xs-2 col-xs-offset-2">
-                    <h4>Artista: </h4>
-                </div>
-                <div class="col-xs-4 col-musiverse-padding">
-                    <input type="text" keyboard-poster post-function="searchArtists" class="form-control" id="navbarInput-01" placeholder="Escreva o nome do artista aqui..." list="artistlist" ng-model="artist">
-                    <!-- AQUI AS SUGESTOES DE ARTISTA -->
-                    <datalist id="artistlist">
-                        <option ng-value="artist" ng-repeat="artist in artists">
-                            <!-- more -->
-                    </datalist>
-                </div>
-            </div>
-            <div class="row demo-row">
-                <div class="col-xs-2 col-xs-offset-2">
-                    <h4>Música: </h4>
-                </div>
-                <div class="col-xs-4 col-musiverse-padding">
-                    <input type="text" keyboard-poster post-function="searchSongsForArtist" class="form-control" id="navbarInput-01" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="song">
-                    <!-- AQUI AS SUGESTOES DE MÚSICAS -->
-                    <datalist id="songlist">
-                        <option ng-value="song.title" ng-repeat="song in songs">
-                        </option>
-                        <!--
-more
-<select class="form-control" ng-model="track" ng-options="s.title for s in songs">
-    <option>--</option>
-</select>-->
-                    </datalist>
-                </div>
-
-            </div>
-            <div class="row demo-row">
-                <div class="col-xs-2 col-xs-offset-5">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary">
-                        <span class="fui-search"></span>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-        <br/>
-        <br/>
-
-        <div class="ng-hide">
-            <div class="demo-type-example">
-                <h2>as <detail>similares</detail> a sua escolha são: </h2>
-            </div>
-            <br/>
-
-            <div class="row col-xs-12">
-                <a href="#" class="thumbnail" ng-repeat="song in recomendation">
-                    <!--  RECOMENDAÇÕES AQUI -->
-                    <div class="rec">
-                        Nome: {{song.title}}
-                        <br/> Artista: {{song.artist}}
-                        <br/> Álbum: {{song.album}}
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-7">
+                        <h3 class="footer-title">musiverse project</h3>
+                        <p>Musiverse foi desenvolvido no III Hackathon promovido pelo Laboratório Analytics da Universidade Federal de Campina Grande.</br>
+                            O código do projeto pode ser visto <a href="https://github.com/joaotargino/musiverse" target="_blank">aqui</a>.
+                        </p>
+                        <!--                    <br/><img src="flat/img/clo.png" height="50px" />-->
                     </div>
-                </a>
-            </div>
-        </div>
+                    <!-- /col-xs-7 -->
 
-        <br/>
-    </div>
-    <!-- /container -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-7">
-                    <h3 class="footer-title">musiverse project</h3>
-                    <p>Musiverse foi desenvolvido no III Hackathon promovido pelo Laboratório Analytics da Universidade Federal de Campina Grande.</br>
-                        O código do projeto pode ser visto <a href="https://github.com/joaotargino/musiverse" target="_blank">aqui</a>.
-                    </p>
-                    <!--                    <br/><img src="flat/img/clo.png" height="50px" />-->
-                </div>
-                <!-- /col-xs-7 -->
-
-                <div class="col-xs-5">
-                    <div class="footer-banner">
-                        <h3 class="footer-title">musiverse team</h3>
-                        <ul>
-                            <li>João Paulo Targino</li>
-                            <li>Nailson Boaz</li>
-                            <li>Ricardo Araújo</li>
-                            <li>Talita Lôbo</li>
-                            <li>Victor Almeida</li>
-                        </ul>
+                    <div class="col-xs-5">
+                        <div class="footer-banner">
+                            <h3 class="footer-title">musiverse team</h3>
+                            <ul>
+                                <li>João Paulo Targino</li>
+                                <li>Nailson Boaz</li>
+                                <li>Ricardo Araújo</li>
+                                <li>Talita Lôbo</li>
+                                <li>Victor Almeida</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="app.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="javascript/app.js"></script>
+        <script src="javascript/routes.js"></script>
 
-    <script src="flat/dist/js/vendor/jquery.min.js"></script>
-    <script src="flat/dist/js/vendor/video.js"></script>
-    <script src="flat/dist/js/flat-ui.min.js"></script>
-    <script src="flat/docs/assets/js/application.js"></script>
+        <script src="flat/dist/js/vendor/jquery.min.js"></script>
+        <script src="flat/dist/js/vendor/video.js"></script>
+        <script src="flat/dist/js/flat-ui.min.js"></script>
+        <script src="flat/docs/assets/js/application.js"></script>
 </body>
 
 </html>

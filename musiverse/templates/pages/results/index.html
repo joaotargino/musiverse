@@ -1,0 +1,15 @@
+<div class="demo-type-example">
+    <h2>as similares a <detail>nome música</detail> são: </h2>
+</div>
+<br/>
+
+<div class="row col-xs-12">
+    <a href="#" class="thumbnail">
+        <!--  RECOMENDAÇÕES AQUI -->
+        <div class="rec" ng-repeat="song in recomendation">
+            Nome: {{song.title}}
+            <br/> Artista: {{song.artist}}
+            <br/> Artista: {{song.album}}
+        </div>
+    </a>
+</div>
