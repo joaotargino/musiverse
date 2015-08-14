@@ -1,23 +1,26 @@
 {
-  "name": "musiverse",
-  "version": "1.0.0",
-  "description": "Rediscover you favorite songs",
-  "main": "musiverse.js",
-  "dependencies": {
-    "express": "^4.13.3"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joaotargino/musiverse.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/joaotargino/musiverse/issues"
-  },
-  "homepage": "https://github.com/joaotargino/musiverse#readme"
+    "name": "musiverse",
+    "version": "1.0.0",
+    "description": "Rediscover you favorite songs",
+    "main": "musiverse.js",
+    "dependencies": {
+        "express": "^4.13.3"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "postinstall": "bower install",
+        "prestart": "npm install",
+        "start": "node musiverse.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/joaotargino/musiverse.git"
+    },
+    "author": "",
+    "license": "",
+    "bugs": {
+        "url": "https://github.com/joaotargino/musiverse/issues"
+    },
+    "homepage": "https://github.com/joaotargino/musiverse#readme"
 }
