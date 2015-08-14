@@ -11,6 +11,7 @@
     "fui-angular": "~0.1.5",
     "flat-ui": "~2.2.2",
     "html5shiv": "~3.7.3",
-    "respond": "~1.4.2"
+    "respond": "~1.4.2",
+    "angular-route": "~1.4.4"
   }
 }
