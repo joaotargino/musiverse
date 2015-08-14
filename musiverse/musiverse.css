@@ -10,7 +10,11 @@ detail {
     margin-bottom: 20px;
 }
 
-.ui-autocomplete{
+.col-musiverse-padding {
+    padding: 10px;
+}
+
+.ui-autocomplete {
     position: absolute;
     top: 100%;
     left: 0;
@@ -38,7 +42,6 @@ detail {
     background-clip: padding-box;
     *border-right-width: 2px;
     *border-bottom-width: 2px;
-
     .ui-menu-item > a.ui-corner-all {
         display: block;
         padding: 3px 15px;
@@ -47,7 +50,6 @@ detail {
         line-height: 18px;
         color: #555555;
         white-space: nowrap;
-
         &.ui-state-hover, &.ui-state-active {
             color: #ffffff;
             text-decoration: none;

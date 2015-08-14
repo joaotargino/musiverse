@@ -14,7 +14,8 @@
     <!--    <link href="flat/docs/assets/css/demo.css" rel="stylesheet">-->
 
     <link href="musiverse.css" rel="stylesheet">
-    <link rel="shortcut icon" href="flat/img/clo.png">
+    <!--    <link rel="shortcut icon" href="bower_components/flat-ui/dist/flat/img/clo.png">-->
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
         <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
@@ -66,38 +67,34 @@
 
         <form ng-submit="search()" role="search" autocomplete="on">
             <div class="row demo-row">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <h4>Artista: </h4>
-                        </div>
-                        <div class="col-xs-8">
-                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome do artista aqui..." list="authorlist" ng-model="query.author">
-                            <!-- AQUI AS SUGESTOES -->
-                            <datalist id="authorlist">
-                                <option ng-value="song.artist_name" ng-repeat="song in songs">
-                                    <!-- more -->
-                            </datalist>
-                        </div>
-                    </div>
+                <div class="col-xs-2 col-xs-offset-2">
+                    <h4>Artista: </h4>
                 </div>
-
+                <div class="col-xs-4 col-musiverse-padding">
+                    <input type="text" keyboard-poster post-function="searchArtists" class="form-control" id="navbarInput-01" placeholder="Escreva o nome do artista aqui..." list="artistlist" ng-model="artist">
+                    <!-- AQUI AS SUGESTOES DE ARTISTA -->
+                    <datalist id="artistlist">
+                        <option ng-value="artist" ng-repeat="artist in artists">
+                            <!-- more -->
+                    </datalist>
+                </div>
             </div>
             <div class="row demo-row">
-                <div class="col-xs-6 col-xs-offset-3">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <h4>Música: </h4>
-                        </div>
-                        <div class="col-xs-8">
-                            <input class="form-control" id="navbarInput-01" type="search" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="query.track">
-                            <!-- AQUI AS SUGESTOES -->
-                            <datalist id="songlist">
-                                <option ng-value="song.title" ng-repeat="song in songs" data-track="{{song.track_id}}"></option>
-                                <!-- more -->
-                            </datalist>
-                        </div>
-                    </div>
+                <div class="col-xs-2 col-xs-offset-2">
+                    <h4>Música: </h4>
+                </div>
+                <div class="col-xs-4 col-musiverse-padding">
+                    <input type="text" keyboard-poster post-function="searchSongsForArtist" class="form-control" id="navbarInput-01" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="song">
+                    <!-- AQUI AS SUGESTOES DE MÚSICAS -->
+                    <datalist id="songlist">
+                        <option ng-value="song.title" ng-repeat="song in songs">
+                        </option>
+                        <!--
+more
+<select class="form-control" ng-model="track" ng-options="s.title for s in songs">
+    <option>--</option>
+</select>-->
+                    </datalist>
                 </div>
 
             </div>
@@ -143,7 +140,7 @@
                     <p>Musiverse foi desenvolvido no III Hackathon promovido pelo Laboratório Analytics da Universidade Federal de Campina Grande.</br>
                         O código do projeto pode ser visto <a href="https://github.com/joaotargino/musiverse" target="_blank">aqui</a>.
                     </p>
-                    <br/><img src="flat/img/clo.png" height="50px" />
+                    <!--                    <br/><img src="flat/img/clo.png" height="50px" />-->
                 </div>
                 <!-- /col-xs-7 -->
 
