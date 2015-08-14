@@ -2,14 +2,18 @@
 
 id=$1
 size=$2
-mode=$3
+data_path=$3
 
-filename=`find . -iname "${id}.csv"`
+SCRIPTPATH=$(dirname "$0")
 
-if [ -f ${filename} ]; then
-  ranking=`Rscript similarity.R ${filename} ${size}`
-  cat `echo $ranking | sed 's/.h5/.metadata.csv/g'`
+filename=`find ${data_path} -iname "${id}.csv"`
+
+if [ -f "${filename}" ]; then
+  ranking=`Rscript ${SCRIPTPATH}/similarity.R ${filename} ${data_path}/database.csv ${size}`
+  for i in $ranking; do
+    cat ${data_path}/`echo $i | sed 's/.h5/.metadata.csv/g'`
+  done 
 else
-  "NOT FOUND"
+  exit 1
 fi
 

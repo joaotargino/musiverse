@@ -1,16 +1,15 @@
 library('proxy')
-library(ggplot2)
 
 args <- commandArgs(TRUE)
 
 file.input.a  <- args[1]
-#strsplit(args[1], split="\\.h5")[[1]][1]
-size          <- as.numeric(args[2])
-mode          <- if( length(args) < 3 ){ 1 } else { as.numeric(args[3]) }
+file.input.base <- args[2]
+size          <- as.numeric(args[3])
+mode          <- if( length(args) < 4 ){ 1 } else { as.numeric(args[4]) }
 
 data.song <- read.csv(file.input.a, header=F)
 
-data.base <- rbind(data.song, read.csv("database.csv", header=F))
+data.base <- rbind(data.song, read.csv(file.input.base, header=F))
 
 normalize <- function(x){(x-min(x))/(max(x)-min(x))}
 
