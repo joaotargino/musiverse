@@ -3,6 +3,14 @@ var morgan = require('morgan');
 var spawn = require('child_process').spawn;
 var Papa = require('papaparse');
 
+var fs = require("fs");
+var file = "data/tracks.db";
+if (!fs.existsSync(file)) {
+    throw "Can't run without database!";
+}
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database(file);
+
 var app = express();
 
 app.use(morgan('common'));
@@ -10,44 +18,29 @@ app.use(morgan('common'));
 app.use(express.static('musiverse'));
 
 app.get('/artists', function (request, response) {
-    var artists = ['Mad Clown', 'Mad Season', 'Madeleine Peyroux', 'Madonna'];
-    var s = request.query.s;
-    response.json(artists.filter(function (artist, index) {
-        return artist.search(s) === 0;
-    }));
+    var result = [];
+    db.each("SELECT DISTINCT artist as a FROM tracks WHERE artist LIKE '" + request.query.s + "%'",
+        function (err, row) {
+            result.push(row.a);
+        },
+        function (err, num) {
+            response.json(result);
+        });
 });
 
 app.get('/songs', function (request, response) {
-    var songs = [
-        {
-            track_id: 'TRQANFJ128E078A7FA',
-            another_id: 'SOXFJDU12A6701F419',
-            artist: 'Madonna',
-            title: 'I\'m So Stupid (Album Version)'
+    var result = [];
+    db.each("SELECT track_id as id, artist as a, song as s FROM tracks WHERE artist LIKE '" + request.query.a + "' ORDER BY song",
+        function (err, row) {
+            result.push({
+                track_id: row.id,
+                artist: row.a,
+                title: row.s
+            });
         },
-        {
-            track_id: 'TRQJUHU128E0798D10',
-            another_id: 'SOAMDTU12A67ADE753',
-            artist: 'Madonna',
-            title: 'Material Girl (Album Version)'
-        },
-        {
-            track_id: 'TRQDKEU128F148D4DC',
-            another_id: 'SOKACCH12A6D4F66BD',
-            artist: 'Madonna',
-            title: 'Nobody Knows Me [Live]'
-        },
-        {
-            track_id: 'TRQOOEU128F9325FC8',
-            another_id: 'SOLFRXB12AB0185255',
-            artist: 'Wooden Wand and the Sky High Band',
-            title: 'Madonna'
-        }
-    ];
-    var a = request.query.a;
-    response.json(songs.filter(function (song, index) {
-        return song.artist === a;
-    }));
+        function (err, num) {
+            response.json(result);
+        });
 });
 
 app.get('/similarity', function (request, response) {

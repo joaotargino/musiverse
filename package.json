@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.13.3",
     "morgan": "^1.6.1",
-    "papaparse": "^4.1.2"
+    "papaparse": "^4.1.2",
+    "sqlite3": "^3.0.10"
   },
   "devDependencies": {},
   "scripts": {
