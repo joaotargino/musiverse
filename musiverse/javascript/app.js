@@ -1,4 +1,4 @@
-angular.module('app', [])
+angular.module('app', ['ngRoute'])
     .service('Musiverse', function ($q, $http) {
         var API_URL = 'http://localhost:3000';
         this.searchArtists = function (term) {
@@ -25,19 +25,6 @@ angular.module('app', [])
     .controller('controller', function ($scope, $http, Musiverse) {
         $scope.allsongs = [];
         $scope.songs = [];
-
-        //        $http.get('data/file.json').success(
-        //            function (data) {
-        //                data.sort(function (a, b) {
-        //                    if (a.artist_name === b.artist_name) {
-        //                        return a.title < b.title ? -1 : 1;
-        //                    } else {
-        //
-        //                        return a.artist_name < b.artist_name ? -1 : 1;
-        //                    }
-        //                });
-        //                $scope.songs = data;
-        //            });
         $scope.search = function () {
 
             var result = $scope.allsongs.filter(function (song, index) {
@@ -48,7 +35,7 @@ angular.module('app', [])
                     url: "http://localhost:3000/similarity",
                     method: "GET",
                     params: {
-                        track_id: result
+                        track_id: result.track_id
                     }
                 })
                 .success(function (data) {
