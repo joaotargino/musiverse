@@ -3,3 +3,4 @@
 .RData
 node_modules
 musiverse/bower_components/
+*.db

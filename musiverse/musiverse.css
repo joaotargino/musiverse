@@ -6,6 +6,10 @@ detail {
     font-size: 13px;
 }
 
+.demo-headline {
+    text-align: center;
+}
+
 .demo-row {
     margin-bottom: 20px;
 }
