@@ -30,10 +30,11 @@ app.get('/artists', function (request, response) {
 
 app.get('/songs', function (request, response) {
     var result = [];
-    db.each("SELECT track_id as id, artist as a, song as s FROM tracks WHERE artist LIKE '" + request.query.a + "' ORDER BY song",
+    db.each("SELECT track_id as id, song_id as sid, artist as a, song as s FROM tracks WHERE artist LIKE '" + request.query.a + "' ORDER BY song",
         function (err, row) {
             result.push({
                 track_id: row.id,
+                song_id: row.sid,
                 artist: row.a,
                 title: row.s
             });
