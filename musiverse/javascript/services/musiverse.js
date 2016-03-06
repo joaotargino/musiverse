@@ -25,6 +25,9 @@ angular.module('app')
             var METHOD = '/similarity?track_id=';
             var deferred = $q.defer();
             $http.get(API_URL + METHOD + track_id).then(function (songs) {
+                var songs_with_id = songs.data.map(function (element) {
+
+                });
                 deferred.resolve(songs.data);
             }, function () {
                 deferred.reject(arguments);
