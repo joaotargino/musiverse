@@ -12,9 +12,11 @@ node_modules
 
 # bower
 # ----
-musiverse/bower_components/
+app/bower_components/
 
 
 # OS X
 # ----
 .DS_Store
+
+dist/
