@@ -1,6 +1,20 @@
+# CRAN + RStudio
+# ----
 .Rproj.user
 .Rhistory
 .RData
+
+
+# npm
+# ----
 node_modules
+
+
+# bower
+# ----
 musiverse/bower_components/
-*.db
+
+
+# OS X
+# ----
+.DS_Store
