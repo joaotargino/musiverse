@@ -15,7 +15,7 @@ var app = express();
 
 app.use(morgan('common'));
 
-app.use(express.static('musiverse'));
+app.use(express.static('dist'));
 
 app.get('/artists', function (request, response) {
     var result = [];

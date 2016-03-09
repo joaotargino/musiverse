@@ -10,16 +10,14 @@ var clean = require('gulp-clean');
 var runSequence = require('run-sequence');
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
+var server = require('gulp-express');
 
 var paths = {
   scripts: 'app/**/*.js',
   styles: ['./app/**/*.css', './app/**/*.scss'],
   index: './app/index.html',
   partials: ['app/**/*.html', '!app/index.html'],
-  distDev: './dist.dev',
-  distProd: './dist.prod',
-  distScriptsProd: './dist.prod/scripts',
-  scriptsDevServer: 'devServer/**/*.js'
+  dist: './dist'
 };
 
 // tasks
@@ -42,7 +40,7 @@ gulp.task('minify-css', function() {
   };
   gulp.src(['./app/**/*.css', '!./app/bower_components/**'])
     .pipe(minifyCSS(opts))
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest(paths.dist))
 });
 gulp.task('minify-js', function() {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
@@ -50,7 +48,7 @@ gulp.task('minify-js', function() {
       // inSourceMap:
       // outSourceMap: "app.js.map"
     }))
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest(paths.dist))
 });
 gulp.task('copy-bower-components', function() {
   gulp.src('./app/bower_components/**')
@@ -58,17 +56,14 @@ gulp.task('copy-bower-components', function() {
 });
 gulp.task('copy-html-files', function() {
   gulp.src('./app/**/*.html')
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest(paths.dist));
 });
 gulp.task('connect', function () {
-  connect.server({
-    root: 'app/',
-    port: 8888
-  });
+ server.run(['musiverse.js']);
 });
 gulp.task('connectDist', function () {
   connect.server({
-    root: 'dist/',
+    root: paths.dist,
     port: 9999
   });
 });
@@ -87,6 +82,11 @@ gulp.task('browserify', function() {
 
 // default task
 gulp.task('default', ['lint', 'connect']);
+gulp.task('dev', function() {
+  runSequence(
+    ['clean'], ['lint', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connect']
+  );
+});
 gulp.task('build', function() {
   runSequence(
     ['clean'], ['lint', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connectDist']
