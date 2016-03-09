@@ -1,5 +1,5 @@
 angular.module('app')
-    .service('Musiverse', function ($q, $http) {
+    .service('Musiverse', ['$q', '$http', function ($q, $http) {
         var API_URL = 'http://localhost:3000';
         this.searchArtists = function (term) {
             var METHOD = '/artists?s=';
@@ -34,4 +34,4 @@ angular.module('app')
             });
             return deferred.promise;
         };
-    });
+    }]);

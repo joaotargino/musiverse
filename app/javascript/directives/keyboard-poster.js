@@ -1,5 +1,5 @@
 angular.module('app')
-    .directive('keyboardPoster', function ($parse, $timeout) {
+    .directive('keyboardPoster', ['$parse', '$timeout', function ($parse, $timeout) {
         var DELAY_TIME_BEFORE_POSTING = 500;
         return function (scope, elem, attrs) {
 
@@ -20,4 +20,4 @@ angular.module('app')
             element.oninput = doWork;
             element.onfocus = doWork;
         };
-    });
+    }]);

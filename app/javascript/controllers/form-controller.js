@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('FormController', function ($scope, $http, Musiverse) {
+    .controller('FormController', ['$scope', '$http', 'Musiverse', function ($scope, $http, Musiverse) {
         $scope.allsongs = [];
         $scope.songs = [];
         $scope.searchArtists = function (term) {
@@ -22,4 +22,4 @@ angular.module('app')
                     return element.title.search(term) === 0;
                 });
         };
-    });
+    }]);

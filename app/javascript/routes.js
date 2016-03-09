@@ -1,5 +1,5 @@
 angular.module('app')
-    .config(function ($routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/main', {
                 templateUrl: '/templates/pages/main/index.html',
@@ -22,4 +22,4 @@ angular.module('app')
             .otherwise({
                 redirectTo: '/'
             });
-    });
+    }]);
