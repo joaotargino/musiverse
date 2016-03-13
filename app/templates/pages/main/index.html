@@ -1,44 +1,44 @@
 <div class="musiverse-padding">
-    <div class="demo-headline">
-        <h2><detail>re.</detail>descubra seu gosto</h2>
+  <div class="demo-headline">
+    <h2><detail>re.</detail>descubra seu gosto</h2>
+  </div>
+  <br/>
+
+  <form ng-submit="searchSimilarSongs()" role="search" autocomplete="on">
+    <div class="row demo-row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <h4>Artista: </h4>
+      </div>
+      <div class="col-xs-4 col-musiverse-padding">
+        <input type="text" keyboard-poster post-function="searchArtists" class="form-control" id="navbarInput-01" placeholder="Escreva o nome do artista aqui..." list="artistlist" ng-model="artist">
+        <!-- AQUI AS SUGESTOES DE ARTISTA -->
+        <datalist id="artistlist">
+          <option ng-value="artist" ng-repeat="artist in artists">
+        </datalist>
+      </div>
     </div>
-    <br/>
+    <div class="row demo-row">
+      <div class="col-xs-2 col-xs-offset-2">
+        <h4>Música: </h4>
+      </div>
+      <div class="col-xs-4 col-musiverse-padding">
+        <input type="text" keyboard-poster post-function="searchSongsForArtist" class="form-control" id="navbarInput-01" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="song">
+        <!-- AQUI AS SUGESTOES DE MÚSICAS -->
+        <datalist id="songlist">
+          <option ng-value="song.title" ng-repeat="song in songs">
+          </option>
+        </datalist>
+      </div>
 
-    <form ng-submit="searchSimilarSongs()" role="search" autocomplete="on">
-        <div class="row demo-row">
-            <div class="col-xs-2 col-xs-offset-2">
-                <h4>Artista: </h4>
-            </div>
-            <div class="col-xs-4 col-musiverse-padding">
-                <input type="text" keyboard-poster post-function="searchArtists" class="form-control" id="navbarInput-01" placeholder="Escreva o nome do artista aqui..." list="artistlist" ng-model="artist">
-                <!-- AQUI AS SUGESTOES DE ARTISTA -->
-                <datalist id="artistlist">
-                    <option ng-value="artist" ng-repeat="artist in artists">
-                </datalist>
-            </div>
-        </div>
-        <div class="row demo-row">
-            <div class="col-xs-2 col-xs-offset-2">
-                <h4>Música: </h4>
-            </div>
-            <div class="col-xs-4 col-musiverse-padding">
-                <input type="text" keyboard-poster post-function="searchSongsForArtist" class="form-control" id="navbarInput-01" placeholder="Escreva o nome da música aqui..." list="songlist" ng-model="song">
-                <!-- AQUI AS SUGESTOES DE MÚSICAS -->
-                <datalist id="songlist">
-                    <option ng-value="song.title" ng-repeat="song in songs">
-                    </option>
-                </datalist>
-            </div>
-
-        </div>
-        <div class="row demo-row">
-            <div class="col-xs-2 col-xs-offset-5">
-                <a href="#/results/{{songs[0].track_id}}">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary">
-                        <span class="fui-play"></span>
-                    </button>
-                </a>
-            </div>
-        </div>
-    </form>
+    </div>
+    <div class="row demo-row">
+      <div class="col-xs-2 col-xs-offset-5">
+        <a href="#/results/{{songs[0].track_id}}">
+          <button type="submit" class="btn btn-block btn-lg btn-primary">
+            <span class="fui-play"></span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </form>
 </div>

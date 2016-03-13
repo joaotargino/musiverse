@@ -1,49 +1,49 @@
 <div class="musiverse-padding">
-    <div ng-hide="songs">
-        <div class="demo-headline">
-            <h2><detail>d[-_-]b</detail></h2>
-            <h2>espera um pouco que eu não conheço essa música!</h2>
-        </div>
+  <div ng-hide="songs">
+    <div class="demo-headline">
+      <h2><detail>d[-_-]b</detail></h2>
+      <h2>espera um pouco que eu não conheço essa música!</h2>
     </div>
-    <div ng-show="songs">
-        <div ng-hide="!!songs.length">
-            <div class="demo-headline">
-                <h2><detail>¯\_(ツ)_/¯</detail></h2>
-                <h2>não tenho essa menhuma aqui não...</h2>
-                <h5>tem certeza que você digitou certo?</h5>
-                <detail>( ͡° ͜ʖ ͡°)</detail>
-            </div>
-        </div>
-        <div ng-show="!!songs.length">
-            <div class="row">
+  </div>
+  <div ng-show="songs">
+    <div ng-hide="!!songs.length">
+      <div class="demo-headline">
+        <h2><detail>¯\_(ツ)_/¯</detail></h2>
+        <h2>não tenho essa menhuma aqui não...</h2>
+        <h5>tem certeza que você digitou certo?</h5>
+        <detail>( ͡° ͜ʖ ͡°)</detail>
+      </div>
+    </div>
+    <div ng-show="!!songs.length">
+      <div class="row">
 
-                <iframe src="https://embed.spotify.com/?uri=spotify:track:4VWvhAyaJ86K2Bq4YZwIVu" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-                <iframe src="https://embed.spotify.com/?uri=spotify:track:31sqbc5iOZIKgzhZWppDuj" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+        <iframe src="https://embed.spotify.com/?uri=spotify:track:4VWvhAyaJ86K2Bq4YZwIVu" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+        <iframe src="https://embed.spotify.com/?uri=spotify:track:31sqbc5iOZIKgzhZWppDuj" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
 
 
-            </div>
-            <div class="row demo-headline">
-                <h4>as músicas mais parecidas com</h4>
-            </div>
-            <div class="row">
-                <div class="col-xs-8 col-xs-offset-2">
-                    <a href="#" class="thumbnail">
+      </div>
+      <div class="row demo-headline">
+        <h4>as músicas mais parecidas com</h4>
+      </div>
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+          <a href="#" class="thumbnail">
                     Música: {{song.title}}
                 <br> Artista: {{song.artist}}
                 </a>
-                </div>
-            </div>
-            <div class="row demo-headline">
-                <h4>são: </h4>
-            </div>
         </div>
-        <div class="row" ng-repeat="song in songs">
-            <div class="col-xs-8 col-xs-offset-2">
-                <a href="#" class="thumbnail">
+      </div>
+      <div class="row demo-headline">
+        <h4>são: </h4>
+      </div>
+    </div>
+    <div class="row" ng-repeat="song in songs">
+      <div class="col-xs-8 col-xs-offset-2">
+        <a href="#" class="thumbnail">
                     Música: {{song.title}}
                     <br> Artista: {{song.artist}}
                     </a>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
