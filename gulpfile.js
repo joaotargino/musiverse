@@ -11,6 +11,9 @@ var runSequence = require('run-sequence');
 var browserify = require('browserify')
 var source = require('vinyl-source-stream')
 var server = require('gulp-express');
+var inject = require('gulp-inject');
+var angularFilesort = require('gulp-angular-filesort');
+var wiredep = require('wiredep').stream;
 
 var paths = {
   scripts: 'app/**/*.js',
@@ -33,6 +36,16 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail'));
 });
+
+gulp.task('watch', ['lint'], function() {
+  // Watch our scripts
+  gulp.watch(['./app/**/*.html', './app/*.css', './app/**/*.js', '!./app/bower_components/**'], [
+    'copy-html-files'
+  ]);
+
+
+});
+
 gulp.task('minify-css', function() {
   var opts = {
     comments: true,
@@ -42,6 +55,8 @@ gulp.task('minify-css', function() {
     .pipe(minifyCSS(opts))
     .pipe(gulp.dest(paths.dist))
 });
+
+
 gulp.task('minify-js', function() {
   gulp.src(['./app/**/*.js', '!./app/bower_components/**'])
     .pipe(uglify({
@@ -50,18 +65,49 @@ gulp.task('minify-js', function() {
     }))
     .pipe(gulp.dest(paths.dist))
 });
+
+
 gulp.task('copy-bower-components', function() {
   gulp.src('./app/bower_components/**')
     .pipe(gulp.dest('dist/bower_components'));
 });
 gulp.task('copy-html-files', function() {
-  gulp.src('./app/**/*.html')
+  gulp.src(['./app/**/*.html', '!./app/index.html'])
+    .pipe(gulp.dest(paths.dist));
+
+  var injectStyles = gulp.src([
+    './app/*.css'
+  ], {
+    read: false
+  });
+
+  var injectScripts = gulp.src([
+    './app/javascript/**/*.js'
+    // '!' + paths.src + '/**/*.test.js'
+  ]).pipe(angularFilesort());
+  // tell wiredep where your bower_components are
+
+  var injectOptions = {
+    relative: true
+  };
+
+  var wiredepOptions = {
+    directory: './app/bower_components/'
+  };
+
+  return gulp.src('./app/index.html')
+    .pipe(inject(injectStyles, injectOptions))
+    .pipe(inject(injectScripts, injectOptions))
+    .pipe(wiredep(wiredepOptions))
     .pipe(gulp.dest(paths.dist));
 });
-gulp.task('connect', function () {
- server.run(['musiverse.js']);
+
+gulp.task('connect', function() {
+  server.run(['musiverse.js']);
+  gulp.run('watch')
 });
-gulp.task('connectDist', function () {
+
+gulp.task('connectDist', function() {
   connect.server({
     root: paths.dist,
     port: 9999
@@ -70,13 +116,16 @@ gulp.task('connectDist', function () {
 
 
 gulp.task('browserify', function() {
-    // Grabs the app.js file
-    return browserify('./app/javascript/app.js')
-        // bundles it and creates a file called main.js
-        .bundle()
-        .pipe(source('main.js'))
-        // saves it the public/js/ directory
-        .pipe(gulp.dest('./dist/js/'));
+  // Grabs the app.js file
+  return browserify('./app/javascript/app.js', {
+    insertGlobals: true,
+    debug: false
+  })
+    // bundles it and creates a file called main.js
+    .bundle()
+    .pipe(source('main.js'))
+    // saves it the public/js/ directory
+    .pipe(gulp.dest('./dist/js/'));
 })
 
 
@@ -84,7 +133,7 @@ gulp.task('browserify', function() {
 gulp.task('default', ['lint', 'connect']);
 gulp.task('dev', function() {
   runSequence(
-    ['clean'], ['lint', 'minify-css', 'minify-js', 'copy-html-files', 'copy-bower-components', 'connect']
+    ['clean'], ['lint', 'minify-css', 'minify-js', 'copy-bower-components', 'copy-html-files', 'connect']
   );
 });
 gulp.task('build', function() {
