@@ -13,15 +13,47 @@ var source = require('vinyl-source-stream')
 var server = require('gulp-express');
 var inject = require('gulp-inject');
 var angularFilesort = require('gulp-angular-filesort');
-var wiredep = require('wiredep').stream;
+var wiredep = require('wiredep')
+  .stream;
+var merge = require('merge2');
+
+var tsc = require('gulp-typescript');
+var tslint = require('gulp-tslint');
+var sourcemaps = require('gulp-sourcemaps');
+var tsProject = tsc.createProject('tsconfig.json');
 
 var paths = {
   scripts: 'app/**/*.js',
   styles: ['./app/**/*.css', './app/**/*.scss'],
   index: './app/index.html',
   partials: ['app/**/*.html', '!app/index.html'],
-  dist: './dist'
+  dist: './dist',
+  typescripts: './app/src/*.ts'
 };
+
+
+gulp.task('ts-lint', function() {
+  return gulp.src(paths.typescripts)
+    .pipe(tslint())
+    .pipe(tslint.report('prose'));
+});
+
+gulp.task('compile-ts', function() {
+  var sourceTsFiles = [paths.typescripts, //path to typescript files
+    './typings/browser.d.ts',
+    './typings/browser/**/*.d.ts'
+  ]; //reference to library .d.ts files
+
+  var tsResult = gulp.src(sourceTsFiles)
+    .pipe(sourcemaps.init())
+    .pipe(tsc(tsProject));
+
+  tsResult.dts.pipe(gulp.dest(paths.dist + '/js'));
+  return tsResult.js
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(paths.dist + '/js'));
+});
+
 
 // tasks
 gulp.task('clean', function() {
@@ -43,6 +75,7 @@ gulp.task('watch', ['lint'], function() {
     'copy-html-files'
   ]);
 
+  gulp.watch('./app/src/**/*.ts', ['ts-compile']);
 
 });
 
@@ -54,6 +87,21 @@ gulp.task('minify-css', function() {
   gulp.src(['./app/**/*.css', '!./app/bower_components/**'])
     .pipe(minifyCSS(opts))
     .pipe(gulp.dest(paths.dist))
+});
+
+var tsProject = tsc.createProject({
+  declaration: true,
+  noExternalResolve: true
+});
+
+gulp.task('ts-compile', function() {
+  var tsResult = gulp.src('./app/src/**/*.ts')
+    .pipe(ts(tsProject));
+
+  return merge([ // Merge the two output streams, so this task is finished when the IO of both operations are done.
+    tsResult.dts.pipe(gulp.dest('./dist/js/definitions')),
+    tsResult.js.pipe(gulp.dest('./dist/js'))
+  ]);
 });
 
 
@@ -82,9 +130,10 @@ gulp.task('copy-html-files', function() {
   });
 
   var injectScripts = gulp.src([
-    './app/javascript/**/*.js'
-    // '!' + paths.src + '/**/*.test.js'
-  ]).pipe(angularFilesort());
+      './app/javascript/**/*.js'
+      // '!' + paths.src + '/**/*.test.js'
+    ])
+    .pipe(angularFilesort());
   // tell wiredep where your bower_components are
 
   var injectOptions = {
@@ -118,9 +167,9 @@ gulp.task('connectDist', function() {
 gulp.task('browserify', function() {
   // Grabs the app.js file
   return browserify('./app/javascript/app.js', {
-    insertGlobals: true,
-    debug: false
-  })
+      insertGlobals: true,
+      debug: false
+    })
     // bundles it and creates a file called main.js
     .bundle()
     .pipe(source('main.js'))
